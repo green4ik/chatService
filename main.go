@@ -35,7 +35,8 @@ func main() {
 	}
 
 	router.Get("/ping", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("pong"))
+		// response := map[string]string{"message": "Hello, World!"}
+		respondWithError(w, 500, "response")
 	})
 
 	fmt.Println("Server started and running at port : ", portString,
