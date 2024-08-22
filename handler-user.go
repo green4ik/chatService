@@ -28,5 +28,6 @@ func (apiConfig *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Req
 	if err != nil {
 		respondWithError(w, 400, fmt.Sprintf("Failed to add a user %v", err))
 	}
+
 	respondWithJSON(w, 200, user)
 }
