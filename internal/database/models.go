@@ -14,4 +14,5 @@ type User struct {
 	ID        uuid.UUID
 	CreatedAt time.Time
 	Name      string
+	ApiKey    string
 }

@@ -29,5 +29,5 @@ func (apiConfig *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Req
 		respondWithError(w, 400, fmt.Sprintf("Failed to add a user %v", err))
 	}
 
-	respondWithJSON(w, 200, user)
+	respondWithJSON(w, 200, databaseUsertoUser(user))
 }
