@@ -41,6 +41,7 @@ func main() {
 	router := chi.NewRouter()
 
 	userRouter := chi.NewRouter()
+	feedRouter := chi.NewRouter()
 
 	router.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"https://*", "http://*"},
@@ -57,7 +58,11 @@ func main() {
 	}
 	router.Mount("/users", userRouter)
 	userRouter.Post("/add", apiCfg.handlerCreateUser)
-	userRouter.Get("/get", apiCfg.handlerGetUserByApiKey)
+	userRouter.Get("/get", apiCfg.middlewareAuth(apiCfg.handlerGetUserByApiKey))
+
+	router.Mount("/feeds", feedRouter)
+	feedRouter.Post("/get", apiCfg.middlewareAuth(apiCfg.handleCreateFeed))
+
 	fmt.Println("Server started and running at port : ", portString,
 		"\nCtrl+C to stop manually")
 	err = srv.ListenAndServe()
