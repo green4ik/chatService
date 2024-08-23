@@ -22,7 +22,7 @@ func respondWithJSON(w http.ResponseWriter, code int, payLoad interface{}) {
 		log.Printf("Failed to marshal json response : %v", payLoad)
 		return
 	}
-	w.Header().Add("Content-type", "application/json")
+	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(code)
 	w.Write(data)
 }

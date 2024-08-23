@@ -57,7 +57,7 @@ func main() {
 	}
 	router.Mount("/users", userRouter)
 	userRouter.Post("/add", apiCfg.handlerCreateUser)
-
+	userRouter.Get("/get", apiCfg.handlerGetUserByApiKey)
 	fmt.Println("Server started and running at port : ", portString,
 		"\nCtrl+C to stop manually")
 	err = srv.ListenAndServe()
