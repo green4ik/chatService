@@ -10,7 +10,7 @@ import (
 	"github.com/green4ik/chatservice/internal/database"
 )
 
-func (apiConfig apiConfig) handleCreateFeed(w http.ResponseWriter, r *http.Request, user database.User) {
+func (apiConfig *apiConfig) handleCreateFeed(w http.ResponseWriter, r *http.Request, user database.User) {
 	type parametrs struct {
 		Name string `json:"name"`
 		URL  string `json:"url`
@@ -37,4 +37,12 @@ func (apiConfig apiConfig) handleCreateFeed(w http.ResponseWriter, r *http.Reque
 	}
 
 	respondWithJSON(w, 201, databaseFeedToFeed(feed))
+}
+
+func (apiConfig *apiConfig) handlerGetFeeds(w http.ResponseWriter, r *http.Request) {
+	feeds, err := apiConfig.DB.GetFeeds(r.Context())
+	if err != nil {
+		respondWithError(w, 400, fmt.Sprintf("Failed to get feed: %v", err))
+	}
+	respondWithJSON(w, 201, databaseFeedsToFeeds(feeds))
 }

@@ -61,7 +61,8 @@ func main() {
 	userRouter.Get("/get", apiCfg.middlewareAuth(apiCfg.handlerGetUserByApiKey))
 
 	router.Mount("/feeds", feedRouter)
-	feedRouter.Post("/get", apiCfg.middlewareAuth(apiCfg.handleCreateFeed))
+	feedRouter.Post("/add", apiCfg.middlewareAuth(apiCfg.handleCreateFeed))
+	feedRouter.Get("/get", apiCfg.handlerGetFeeds)
 
 	fmt.Println("Server started and running at port : ", portString,
 		"\nCtrl+C to stop manually")
